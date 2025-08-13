@@ -27,166 +27,83 @@ let firstElement = (src,className) =>{
     `
 }
 
+let preventClick = () =>{
+    console.log("preventClick Function Called");
+    rockBtn.disabled = true;
+    paperBtn.disabled = true;
+    scissorsBtn.disabled = true;
+    computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
+    player.innerHTML = getRandomHand(hands[0],playerHands[0]);
+}
+
+let Winner = () =>{
+    console.log("Winner Function Called");
+    if(computerScore > 2){
+        pcWins = true;
+
+        preventClick();
+
+    }
+    else if(playerScore > 2 ){
+        playerWins = true;
+
+        preventClick();
+
+    }
+}
+
 let playerScore = 0;
 let computerScore = 0;
 let pcWins = false;
 let playerWins = false;
-rockBtn.addEventListener("click",()=>{
+
+
+let gameLogic = (playerChoise) =>{
     let randomNumber = Math.floor(Math.random() * 3);
+
     computer.innerHTML = firstElement(hands[0],"starting_animation_pc");
     player.innerHTML = firstElement(hands[0],"starting_animation");
-    
 
     
-    if(computerScore == 3){
-        pcWins = true;
-        rockBtn.disabled = true;
-        paperBtn.disabled = true;
-        scissorsBtn.disabled = true;
-        computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-        player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-
-        return
-    }
-    else if(playerScore == 3){
-        playerWins = true;
-        rockBtn.disabled = true;
-        paperBtn.disabled = true;
-        scissorsBtn.disabled = true;
-        computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-        player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-
-
-        return
-    }
     setTimeout(() => {
-        
         computer.innerHTML = getRandomHand(hands[randomNumber],pcHands[randomNumber]);
-        player.innerHTML = getRandomHand(hands[0],playerHands[0]);
+        player.innerHTML = getRandomHand(hands[playerChoise],playerHands[playerChoise]);
         
-        
-        // console.log(randomNumber);
-        // console.log(hands[randomNumber]);
-
-        // check winner 
-        if(randomNumber == 1){
-            computerScore++;      
-            
+        if(playerChoise === randomNumber){
+            console.log("tie")
         }
-        else if(randomNumber == 2){
+        else if(playerChoise === 0 && randomNumber === 2 || playerChoise ===    1 && randomNumber === 0 || playerChoise === 2 && randomNumber === 1){
             playerScore++;
-         
+            console.log(pcHands[randomNumber]);
+            console.log(playerHands[playerChoise]);
         }
+        else{
+            console.log(pcHands[randomNumber]);
+            console.log(playerHands[playerChoise]);
+            computerScore++;
+        }
+        
         computerScoreElement.innerHTML = computerScore;
         playerScoreElement.innerHTML = playerScore;
-
-
-        console.log(`Computer: ${computerScore} Player: ${playerScore}`);
-
         
+        Winner();
     },3000);
-    
+ 
+}
+
+
+rockBtn.addEventListener("click",()=>{
+gameLogic(0)
 
 });
 
 paperBtn.addEventListener("click",()=>{
-    let randomNumber = Math.floor(Math.random() * 3);
-    computer.innerHTML = firstElement(hands[0],"starting_animation_pc");
-    player.innerHTML = firstElement(hands[0],"starting_animation");
 
- 
-   
-    if(computerScore == 3){
-        pcWins = true;
-        rockBtn.disabled = true;
-        paperBtn.disabled = true;
-        scissorsBtn.disabled = true;
-        computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-        player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-
-        return
-    }
-    else if(playerScore == 3){
-        playerWins = true;
-        rockBtn.disabled = true;
-        paperBtn.disabled = true;
-        scissorsBtn.disabled = true;
-        computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-        player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-        return
-    }
-    setTimeout(() => {
-
-        player.innerHTML = getRandomHand(hands[1],playerHands[1]);
-        computer.innerHTML = getRandomHand(hands[randomNumber],pcHands[randomNumber]);
-
-
-        // console.log(randomNumber);
-        // console.log(hands[randomNumber]);
-
-        if(randomNumber == 2){
-            computerScore++;            
-        }
-        else if(randomNumber == 0){
-            playerScore++;
-        }
-
-        computerScoreElement.innerHTML = computerScore;
-        playerScoreElement.innerHTML = playerScore;
-
-        console.log(`Computer: ${computerScore} Player: ${playerScore}`);
-
-    },3000);
-
+    gameLogic(1)
 });
 scissorsBtn.addEventListener("click",()=>{
-    let randomNumber = Math.floor(Math.random() * 3);
 
-    computer.innerHTML = firstElement(hands[0],"starting_animation_pc");
-    player.innerHTML = firstElement(hands[0],"starting_animation");
-
- 
-    
-            if(computerScore == 3){
-                pcWins = true;
-                rockBtn.disabled = true;
-                paperBtn.disabled = true;
-                scissorsBtn.disabled = true;
-                computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-                player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-            }
-            else if(playerScore == 3){
-                playerWins = true;
-                rockBtn.disabled = true;
-                paperBtn.disabled = true;
-                scissorsBtn.disabled = true;
-                computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
-                player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-            }
-   
-    setTimeout(() => {
-
-        player.innerHTML = getRandomHand(hands[2],playerHands[2]);
-        computer.innerHTML = getRandomHand(hands[randomNumber],pcHands[randomNumber]);
-
-
-        // console.log(randomNumber);
-        // console.log(hands[randomNumber]);
-
-        
-        if(randomNumber == 0){
-            computerScore++;            
-        }
-        else if(randomNumber == 1){
-            playerScore++;
-        }
-        computerScoreElement.innerHTML = computerScore;
-        playerScoreElement.innerHTML = playerScore;
-
-        console.log(`Computer: ${computerScore} Player: ${playerScore}`);
-
-        
-    },3000);
+    gameLogic(2)
 
 });
 
@@ -195,9 +112,12 @@ resetBtn.addEventListener("click",() =>{
 
     computer.innerHTML = getRandomHand(hands[0],pcHands[0]);
     player.innerHTML = getRandomHand(hands[0],playerHands[0]);
-
     playerScore = 0;
     computerScore = 0;
     computerScoreElement.innerHTML = "Computer";
     playerScoreElement.innerHTML = "Player";
+    rockBtn.disabled = false;
+    paperBtn.disabled = false;
+    scissorsBtn.disabled = false;
 })
+
