@@ -1,0 +1,231 @@
+/* * {
+    cursor: url("../images/pointer.svg")2 2, auto;
+} */
+
+body {
+    background-color: #154D71;
+    display: grid;
+    place-items: center;
+    min-height: 100dvh;
+    user-select: none;
+    /* cursor: url("../images/pointer.svg"), auto; */
+
+}
+
+
+.font {
+    font-family: "Mouse Memoirs", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    color: #FFFFFF;
+
+
+}
+
+.font2 {
+    font-family: "Chewy", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+}
+
+.main_tag {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 60px;
+}
+
+.rock_paper_scissors {
+    text-align: center;
+    word-spacing: 30px;
+    font-size: 64px;
+    margin-bottom: 40px;
+}
+
+.game_section {
+    display: flex;
+    column-gap: 120px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* computer */
+.computer_rock {
+    width: 150px;
+    height: 150px;
+    transform: rotateZ(-3deg);
+
+}
+
+.computer_scissors {
+    width: 200px;
+    height: 200px;
+    transform: rotateZ(90deg);
+}
+
+.computer_paper {
+    width: 150px;
+    height: 150px;
+    transform: rotateZ(90deg);
+}
+
+.starting_animation_pc {
+    animation: starting_animation 1s 3 forwards;
+
+}
+
+@keyframes starting_animation {
+    0% {
+        transform: rotateZ(0deg);
+
+    }
+
+    50% {
+        transform: rotateZ(-35deg);
+    }
+
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+
+/* text */
+.result {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.result_text_vs {
+    font-size: 35px;
+    color: #F0B91E;
+}
+
+/* player */
+.player_rock {
+    transform: rotateY(180deg);
+    width: 150px;
+    height: 150px;
+    /* transform: rotateZ(220deg) rotateX(180deg); */
+}
+
+.player_paper {
+    transform: rotateZ(0deg);
+    width: 150px;
+    height: 150px;
+}
+
+.player_scissors {
+    transform: rotateZ(-90deg);
+    width: 200px;
+    height: 200px;
+}
+
+.starting_animation {
+    animation: starting_animation_player 1s 3 forwards;
+
+}
+
+@keyframes starting_animation_player {
+    0% {
+        transform: rotateZ(180deg) rotateX(180deg);
+
+    }
+
+    50% {
+        transform: rotateZ(220deg) rotateX(180deg);
+
+    }
+
+    100% {
+        transform: rotateZ(180deg) rotateX(180deg);
+    }
+}
+
+
+/* buttons section */
+.button_section {
+    width: fit-content;
+    position: relative;
+    display: flex;
+    column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_section>button {
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 100;
+    text-shadow: 0 5px 5px #000000;
+}
+
+.rock_btn {
+    color: #D2272B;
+}
+
+.scissors_btn {
+    color: #1645F5;
+}
+
+.paper_btn {
+    color: #F0B91E;
+}
+
+
+.button_img {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    z-index: -1;
+    opacity: 0;
+    transition: .4s;
+}
+
+.stone {
+    left: 15px;
+}
+
+.scissors {
+    opacity: 0;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+}
+
+.paper {
+    left: 108px;
+    width: 55px;
+    height: 55px;
+}
+
+.button_section>button:hover .button_img {
+    opacity: 1;
+    top: 55px;
+}
+
+.reset_btn {
+    background-color: transparent;
+    font-size: 32px;
+    border: 3px solid #FFFFFF;
+    border-radius: 10px;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: .3s;
+    transform: translateX(-12px);
+}
+
+.reset_btn:hover {
+    transform: translateY(-10px);
+    border-color: #F0B91E;
+}
